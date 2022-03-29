@@ -2,14 +2,7 @@ def ffmpeg(args):
     err = None
     command = ["ffmpeg"] + args
     import subprocess
-    ffmpeg = subprocess.Popen(command)
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,universal_newlines=True)
 
-    while err == None:
-        out, err = ffmpeg.communicate()
-
-        import time
-        time.sleep(1)
-
-    if err:
-        print(" ".join(command))
-        raise Exception(err)
+    for line in process.stdout:
+        print(line)
