@@ -6,8 +6,10 @@ class ProgressBarDownloadError(Exception):
     pass
 
 
-def download(url, filename="filename") -> None:
+def download(url: str, filename: str ="filename") -> None:
     r = requests.get(url, allow_redirects=True)
+
+    print(f"Downloading {filename}")
 
     block_size = 1024
     total_size_in_bytes = int(r.headers.get('content-length', 0))
